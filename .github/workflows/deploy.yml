@@ -2,7 +2,7 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,22 +15,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-      - run: corepack enable
-      - run: corepack prepare pnpm@9 --activate
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm start
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: output
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
