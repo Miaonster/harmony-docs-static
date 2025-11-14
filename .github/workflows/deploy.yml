@@ -22,9 +22,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: node src/index.js
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm start
       - uses: actions/upload-pages-artifact@v3
         with:
           path: output
