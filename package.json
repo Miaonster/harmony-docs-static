@@ -1,0 +1,22 @@
+{
+  "name": "harmony-docs-scraper",
+  "version": "1.0.0",
+  "description": "抓取鸿蒙开发文档并生成静态页面供 Cursor 索引",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "scrape": "node src/index.js"
+  },
+  "keywords": [
+    "harmonyos",
+    "scraper",
+    "documentation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.3.2",
+    "puppeteer": "^24.30.0"
+  }
+}
