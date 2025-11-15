@@ -6,7 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "scrape": "node src/index.js"
+    "extract": "node src/index.js --stage extract",
+    "scrape": "node src/index.js --stage scrape",
+    "index": "node src/index.js --stage index",
+    "all": "node src/index.js --stage all"
   },
   "keywords": [
     "harmonyos",
