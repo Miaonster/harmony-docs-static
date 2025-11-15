@@ -39,7 +39,6 @@ docs/index.html
 - `--dry-run, -d` 仅列出链接，不抓取
 - `--stage, -s <stage>` 执行阶段：`extract`、`scrape`、`index`、`all`
 - `--output, -o <dir>` 指定输出目录（默认 `docs`）
-- `--url, -u <url>` 指定起始 URL（默认内置）
 
 示例：
 
@@ -66,10 +65,7 @@ pnpm start --stage index
 
 ## GitHub Pages 部署
 
-仓库已包含工作流：`.github/workflows/deploy.yml`
-
-- 触发：推送到 `main` 或手动触发
-- 步骤：`pnpm install` → `pnpm start` → 上传 `docs/` 为 Pages 产物
+- 步骤：上传 `docs/` 为 Pages 产物
 - 配置：Settings → Pages → Source 选择 `GitHub Actions`
 
 推送后访问：
@@ -94,35 +90,11 @@ https://miaonster.github.io/harmony-docs-static/
 
 该静态站点可与 Cursor Docs 等文档索引工具配合使用，对页面进行离线索引与检索，便于在本地或编辑器内快速查询。
 
-## CI
-
-通用 CI 工作流：`.github/workflows/ci.yml`
-
-- 触发：`push`、`pull_request`
-- 步骤：Checkout → Setup Node（缓存 pnpm）→ Setup pnpm → 安装 → `pnpm build` → `pnpm test`
-
-项目暂未提供真实构建/测试逻辑，示例脚本为占位，可按需替换。
-
 ## 依赖与环境
 
 - Node.js 20+
 - 包管理器：pnpm（Actions 通过 Corepack 激活）
 - 运行时依赖：`puppeteer`（headless Chrome）与 `fs-extra`
-
-## 代码位置参考
-
-- 参数解析：`src/index.js:9-71`
-- 阶段调度：`src/scraper.js:440-451` 与 `src/scraper.js:469`
-- 链接保存/读取：`src/scraper.js:278-287`、`src/scraper.js:292-302`
-- URL→文件映射：`src/scraper.js:195-223`
-- 抓取单页：`src/scraper.js:228-273`
-- 索引生成：`src/scraper.js:25-43`
-
-## 常见问题
-
-- Actions 无法找到 pnpm：工作流已通过 Corepack 激活 `pnpm@9`
-- 锁文件未找到：使用 `pnpm-lock.yaml`，并在 `setup-node` 使用 `cache: pnpm`
-- 索引覆盖主页：若同时抓取了根路径，生成索引会覆盖 `docs/index.html`。如需保留原始首页，可调整生成策略。
 
 ## 许可
 
